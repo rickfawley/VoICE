@@ -351,6 +351,22 @@ Unless otherwise stated, the project source code and documentation are licensed 
 
 Datasets, academic papers, and other third-party materials are not automatically covered by the project licence and remain subject to their respective terms. A public release should include a `THIRD_PARTY_NOTICES.md` file describing those materials.
 
+## Generated results and omitted files
+
+To keep the repository reasonably sized and within GitHub's file-size limits, some generated experiment artefacts are intentionally excluded from version control.
+
+The following files are not included:
+
+* `results/experiments/` — complete per-run experiment outputs, including detailed counterfactual result tables and dataset snapshots.
+* `results/summary/* dataset.csv` — generated copies of datasets used in individual clustering runs.
+
+These files are outputs rather than source data. The underlying benchmark datasets remain available under `data/`, while smaller derived artefacts—including centroids, feature weights, metadata, evaluation metrics, and comparison summaries—are retained under `results/summary/` and `results/compare/`.
+
+The omitted files can be recreated locally by rerunning the corresponding clustering and counterfactual experiments through the Streamlit application. Generated outputs are ignored by Git to prevent large or duplicated files from being committed accidentally.
+
+Results may vary slightly between environments because of differences in Python package versions, numerical optimisation, and random initialisation.
+
+
 ---
 
 Software repository: [github.com/rickfawley/VoICE](https://github.com/rickfawley/VoICE)
