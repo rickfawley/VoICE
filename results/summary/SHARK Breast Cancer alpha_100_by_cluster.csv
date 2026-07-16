@@ -1,0 +1,3 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Breast Cancer,SHARK,Ranked + weighted SHARK,0,181,0.9916549227597983,181,100.0,0.0,0.15727942116576873,0.9916549227597983
+Breast Cancer,SHARK,Ranked + weighted SHARK,1,388,0.9923743087033604,388,100.0,0.0,0.0,0.9923743087033604

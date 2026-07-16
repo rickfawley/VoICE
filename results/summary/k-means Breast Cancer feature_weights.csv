@@ -1,0 +1,31 @@
+rank,dataset,algorithm,feature,weight
+1,Breast Cancer,k-means,radius_mean,0.03333333333333333
+2,Breast Cancer,k-means,texture_mean,0.03333333333333333
+3,Breast Cancer,k-means,perimeter_mean,0.03333333333333333
+4,Breast Cancer,k-means,area_mean,0.03333333333333333
+5,Breast Cancer,k-means,smoothness_mean,0.03333333333333333
+6,Breast Cancer,k-means,compactness_mean,0.03333333333333333
+7,Breast Cancer,k-means,concavity_mean,0.03333333333333333
+8,Breast Cancer,k-means,concave points_mean,0.03333333333333333
+9,Breast Cancer,k-means,symmetry_mean,0.03333333333333333
+10,Breast Cancer,k-means,fractal_dimension_mean,0.03333333333333333
+11,Breast Cancer,k-means,radius_se,0.03333333333333333
+12,Breast Cancer,k-means,texture_se,0.03333333333333333
+13,Breast Cancer,k-means,perimeter_se,0.03333333333333333
+14,Breast Cancer,k-means,area_se,0.03333333333333333
+15,Breast Cancer,k-means,smoothness_se,0.03333333333333333
+16,Breast Cancer,k-means,compactness_se,0.03333333333333333
+17,Breast Cancer,k-means,concavity_se,0.03333333333333333
+18,Breast Cancer,k-means,concave points_se,0.03333333333333333
+19,Breast Cancer,k-means,symmetry_se,0.03333333333333333
+20,Breast Cancer,k-means,fractal_dimension_se,0.03333333333333333
+21,Breast Cancer,k-means,radius_worst,0.03333333333333333
+22,Breast Cancer,k-means,texture_worst,0.03333333333333333
+23,Breast Cancer,k-means,perimeter_worst,0.03333333333333333
+24,Breast Cancer,k-means,area_worst,0.03333333333333333
+25,Breast Cancer,k-means,smoothness_worst,0.03333333333333333
+26,Breast Cancer,k-means,compactness_worst,0.03333333333333333
+27,Breast Cancer,k-means,concavity_worst,0.03333333333333333
+28,Breast Cancer,k-means,concave points_worst,0.03333333333333333
+29,Breast Cancer,k-means,symmetry_worst,0.03333333333333333
+30,Breast Cancer,k-means,fractal_dimension_worst,0.03333333333333333

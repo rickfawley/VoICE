@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Diabetes,k-means,Unweighted k-means,0,62631,0.9999667010862862,62631,100.0,0.0,0.2328025850986856,0.9999667010862862
+Diabetes,k-means,Unweighted k-means,1,178678,0.999985952854013,178678,100.0,0.0,0.07706609065049339,0.999985952854013
+Diabetes,k-means,Unweighted k-means,2,12371,0.9954269128149522,12371,100.0,0.0,0.1840343448875395,0.9954269128149522

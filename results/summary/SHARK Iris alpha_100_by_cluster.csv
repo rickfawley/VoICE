@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Iris,SHARK,Ranked + weighted SHARK,0,52,0.8609434863422094,52,100.0,0.012755802419854124,0.3491709678967287,0.8609434863422094
+Iris,SHARK,Ranked + weighted SHARK,1,48,0.9279072178473525,48,100.0,0.0,0.0,0.9279072178473525
+Iris,SHARK,Ranked + weighted SHARK,2,50,0.30512052245041466,50,100.0,0.0,0.0,0.30512052245041466

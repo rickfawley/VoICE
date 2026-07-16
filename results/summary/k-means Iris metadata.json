@@ -1,0 +1,48 @@
+{
+  "algorithm": "k-means",
+  "dataset": "Iris",
+  "folder_name": "k-means Iris (ARI=0.6201)",
+  "experiment_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)",
+  "summary_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary",
+  "history_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\history",
+  "n_clusters": 3,
+  "seed": 42,
+  "n_init": 10,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "inertia": 140.96581663074699,
+  "ARI": 0.6201351808870379,
+  "n_observations": 150,
+  "n_features": 4,
+  "feature_names": [
+    "sepal_length",
+    "sepal_width",
+    "petal_length",
+    "petal_width"
+  ],
+  "create_timestamped_dataset": false,
+  "timestamp": null,
+  "paths": {
+    "experiment": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)\\k-means Iris dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)\\k-means Iris centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)\\k-means Iris feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)\\k-means Iris alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Iris (ARI=0.6201)\\k-means Iris metadata.json"
+    },
+    "summary": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Iris dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Iris centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Iris feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Iris alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Iris metadata.json"
+    },
+    "history": {
+      "dataset": null,
+      "centroids": null,
+      "feature_weights": null,
+      "alpha_100_by_cluster": null,
+      "metadata": null
+    }
+  }
+}

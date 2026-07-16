@@ -1,0 +1,5 @@
+rank,dataset,algorithm,feature,weight
+1,Palmer Penguins,SHARK,flipper_length_mm,0.3576253952680732
+2,Palmer Penguins,SHARK,bill_depth_mm,0.27170534777824373
+3,Palmer Penguins,SHARK,body_mass_g,0.250628847307605
+4,Palmer Penguins,SHARK,bill_length_mm,0.12004040964607808

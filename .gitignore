@@ -1,0 +1,232 @@
+# =============================================================================
+# Python
+# =============================================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# =============================================================================
+# Test, lint and type-check caches
+# =============================================================================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.tox/
+.nox/
+
+# Hypothesis-generated examples
+.hypothesis/
+
+# =============================================================================
+# Streamlit
+# =============================================================================
+
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# =============================================================================
+# Jupyter
+# =============================================================================
+
+.ipynb_checkpoints/
+
+# =============================================================================
+# Environment variables and local configuration
+# =============================================================================
+
+.env
+.env.*
+!.env.example
+
+*.local.toml
+*.local.yaml
+*.local.yml
+config.local.*
+secrets.*
+!secrets.example.*
+
+# =============================================================================
+# IDEs and editors
+# =============================================================================
+
+.vscode/
+.idea/
+*.code-workspace
+
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# =============================================================================
+# Operating-system files
+# =============================================================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# Logs, temporary files and crash reports
+# =============================================================================
+
+*.log
+logs/
+
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+
+tmp/
+temp/
+
+# Python crash/debug output
+*.prof
+*.lprof
+*.pstats
+
+# =============================================================================
+# Generated experiment output
+# =============================================================================
+
+# Local and reproducible outputs should not normally be committed.
+results/generated/
+results/history/
+results/tmp/
+results/cache/
+results/checkpoints/
+
+# Timestamped or ad-hoc experiment runs
+results/runs/
+results/run-*/
+results/*-local/
+results/**/*_local.*
+
+# Solver/debug exports
+results/**/debug/
+results/**/intermediate/
+results/**/checkpoints/
+
+# Preserve checked-in reference and publication results.
+!results/reference/
+!results/reference/**
+!results/summary/
+!results/summary/**
+!results/compare/
+!results/compare/**
+
+# =============================================================================
+# Local data and downloaded files
+# =============================================================================
+
+# Temporary downloads and caches
+data/cache/
+data/downloads/
+data/tmp/
+data/**/*.part
+data/**/*.download
+
+# Local user-provided datasets
+data/local/
+data/private/
+data/uploads/
+
+# Do not blanket-ignore data/, because the repository currently contains
+# versioned benchmark datasets and their metadata.
+
+# =============================================================================
+# Reference material
+# =============================================================================
+
+# Temporary or working paper files
+references/drafts/
+references/tmp/
+references/*.aux
+references/*.bbl
+references/*.blg
+references/*.fdb_latexmk
+references/*.fls
+references/*.log
+references/*.out
+references/*.synctex.gz
+
+# Do not blanket-ignore PDFs. Whether reference PDFs are committed should be
+# decided individually based on redistribution rights.
+
+# =============================================================================
+# Generated reports and documentation builds
+# =============================================================================
+
+site/
+docs/_build/
+docs/build/
+
+# LaTeX build artefacts outside references/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lot
+*.lof
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# =============================================================================
+# Local archives and exported bundles
+# =============================================================================
+
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# =============================================================================
+# Credentials and keys
+# =============================================================================
+
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+# Generated experiment outputs
+results/experiments/
+
+# Generated dataset snapshots duplicated from data/
+results/summary/* dataset.csv

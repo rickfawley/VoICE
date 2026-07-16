@@ -1,0 +1,49 @@
+rank,dataset,algorithm,feature,weight
+1,German Credit,SHARK,credit_history_no credits/all paid,0.9999999999999529
+2,German Credit,SHARK,credit_history_existing paid,1.0493023255813466e-15
+3,German Credit,SHARK,purpose_business,1.038166823052939e-15
+4,German Credit,SHARK,credit_amount,1.0221449610519706e-15
+5,German Credit,SHARK,credit_history_critical/other existing credit,1.0175712143927606e-15
+6,German Credit,SHARK,duration,1.0141392506399106e-15
+7,German Credit,SHARK,existing_credits,1.0128016406516517e-15
+8,German Credit,SHARK,checking_status_no checking,1.0084403088496688e-15
+9,German Credit,SHARK,purpose_radio/tv,1.00674157303365e-15
+10,German Credit,SHARK,property_magnitude_real estate,1.005098272411813e-15
+11,German Credit,SHARK,credit_history_delayed previously,1.0040366972476774e-15
+12,German Credit,SHARK,savings_status_<100,1.0037753056330476e-15
+13,German Credit,SHARK,other_payment_plans_none,1.0035893611731925e-15
+14,German Credit,SHARK,installment_commitment,1.0029682763046297e-15
+15,German Credit,SHARK,employment_4<=X<7,1.0028494799502243e-15
+16,German Credit,SHARK,other_parties_none,1.002289335577743e-15
+17,German Credit,SHARK,purpose_education,1.0021978021977657e-15
+18,German Credit,SHARK,savings_status_>=1000,1.0021052631578744e-15
+19,German Credit,SHARK,savings_status_no known savings,1.0019235628773245e-15
+20,German Credit,SHARK,property_magnitude_car,1.0016275951617598e-15
+21,German Credit,SHARK,housing_own,1.0015793123138518e-15
+22,German Credit,SHARK,purpose_repairs,1.001520558572485e-15
+23,German Credit,SHARK,housing_rent,1.001431299199968e-15
+24,German Credit,SHARK,purpose_retraining,1.0011973807296104e-15
+25,German Credit,SHARK,savings_status_500<=X<1000,1.0010202783861446e-15
+26,German Credit,SHARK,employment_unemployed,1.0009818018825004e-15
+27,German Credit,SHARK,personal_status_male mar/wid,1.0008806350156653e-15
+28,German Credit,SHARK,job_skilled,1.0008766437068988e-15
+29,German Credit,SHARK,employment_<1,1.0008225054352663e-15
+30,German Credit,SHARK,purpose_new car,1.000809840928217e-15
+31,German Credit,SHARK,property_magnitude_no known property,1.0006771850097095e-15
+32,German Credit,SHARK,job_unskilled resident,1.000651465797986e-15
+33,German Credit,SHARK,other_parties_guarantor,1.0006165556612091e-15
+34,German Credit,SHARK,purpose_other,1.0005942857142238e-15
+35,German Credit,SHARK,checking_status_<0,1.000545103031957e-15
+36,German Credit,SHARK,age,1.000500654520385e-15
+37,German Credit,SHARK,personal_status_male single,1.0004550656344343e-15
+38,German Credit,SHARK,purpose_used car,1.000353694847932e-15
+39,German Credit,SHARK,foreign_worker_yes,1.0001976665983728e-15
+40,German Credit,SHARK,employment_>=7,1.0001728776184596e-15
+41,German Credit,SHARK,num_dependents,1.000127266942361e-15
+42,German Credit,SHARK,checking_status_>=200,1.0001193018371171e-15
+43,German Credit,SHARK,job_unemp/unskilled non res,1.0000174291938625e-15
+44,German Credit,SHARK,purpose_furniture/equipment,1.0000101188969853e-15
+45,German Credit,SHARK,other_payment_plans_stores,1.0000083722876903e-15
+46,German Credit,SHARK,own_telephone_yes,1.000002768740856e-15
+47,German Credit,SHARK,residence_since,1.0000008559481561e-15
+48,German Credit,SHARK,personal_status_male div/sep,9.999999999999447e-16

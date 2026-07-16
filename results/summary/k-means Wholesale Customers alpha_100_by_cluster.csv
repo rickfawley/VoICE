@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Wholesale Customers,k-means,Unweighted k-means,0,45,0.9753678154238276,45,100.0,0.0,0.46298384253350683,0.9753678154238276
+Wholesale Customers,k-means,Unweighted k-means,1,393,0.9809177391988542,393,100.0,0.0,0.03780543364603801,0.9809177391988542
+Wholesale Customers,k-means,Unweighted k-means,2,2,0.5479334203435323,2,100.0,0.0,0.27396671017176616,0.5479334203435323

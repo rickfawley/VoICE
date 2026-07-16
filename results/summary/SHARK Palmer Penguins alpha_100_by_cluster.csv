@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Palmer Penguins,SHARK,Ranked + weighted SHARK,0,118,0.9962179277671736,118,100.0,0.0,0.12779292203159515,0.9962179277671736
+Palmer Penguins,SHARK,Ranked + weighted SHARK,1,101,0.9743492650626556,101,100.0,0.0,0.3456460947547463,0.9743492650626556
+Palmer Penguins,SHARK,Ranked + weighted SHARK,2,123,0.658694608347118,123,100.0,0.0,0.09095101304676183,0.658694608347118

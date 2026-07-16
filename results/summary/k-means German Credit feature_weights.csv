@@ -1,0 +1,49 @@
+rank,dataset,algorithm,feature,weight
+1,German Credit,k-means,duration,0.020833333333333332
+2,German Credit,k-means,credit_amount,0.020833333333333332
+3,German Credit,k-means,installment_commitment,0.020833333333333332
+4,German Credit,k-means,residence_since,0.020833333333333332
+5,German Credit,k-means,age,0.020833333333333332
+6,German Credit,k-means,existing_credits,0.020833333333333332
+7,German Credit,k-means,num_dependents,0.020833333333333332
+8,German Credit,k-means,checking_status_<0,0.020833333333333332
+9,German Credit,k-means,checking_status_>=200,0.020833333333333332
+10,German Credit,k-means,checking_status_no checking,0.020833333333333332
+11,German Credit,k-means,credit_history_critical/other existing credit,0.020833333333333332
+12,German Credit,k-means,credit_history_delayed previously,0.020833333333333332
+13,German Credit,k-means,credit_history_existing paid,0.020833333333333332
+14,German Credit,k-means,credit_history_no credits/all paid,0.020833333333333332
+15,German Credit,k-means,purpose_new car,0.020833333333333332
+16,German Credit,k-means,purpose_used car,0.020833333333333332
+17,German Credit,k-means,purpose_business,0.020833333333333332
+18,German Credit,k-means,purpose_education,0.020833333333333332
+19,German Credit,k-means,purpose_furniture/equipment,0.020833333333333332
+20,German Credit,k-means,purpose_other,0.020833333333333332
+21,German Credit,k-means,purpose_radio/tv,0.020833333333333332
+22,German Credit,k-means,purpose_repairs,0.020833333333333332
+23,German Credit,k-means,purpose_retraining,0.020833333333333332
+24,German Credit,k-means,savings_status_500<=X<1000,0.020833333333333332
+25,German Credit,k-means,savings_status_<100,0.020833333333333332
+26,German Credit,k-means,savings_status_>=1000,0.020833333333333332
+27,German Credit,k-means,savings_status_no known savings,0.020833333333333332
+28,German Credit,k-means,employment_4<=X<7,0.020833333333333332
+29,German Credit,k-means,employment_<1,0.020833333333333332
+30,German Credit,k-means,employment_>=7,0.020833333333333332
+31,German Credit,k-means,employment_unemployed,0.020833333333333332
+32,German Credit,k-means,personal_status_male div/sep,0.020833333333333332
+33,German Credit,k-means,personal_status_male mar/wid,0.020833333333333332
+34,German Credit,k-means,personal_status_male single,0.020833333333333332
+35,German Credit,k-means,other_parties_guarantor,0.020833333333333332
+36,German Credit,k-means,other_parties_none,0.020833333333333332
+37,German Credit,k-means,property_magnitude_no known property,0.020833333333333332
+38,German Credit,k-means,property_magnitude_real estate,0.020833333333333332
+39,German Credit,k-means,property_magnitude_car,0.020833333333333332
+40,German Credit,k-means,other_payment_plans_none,0.020833333333333332
+41,German Credit,k-means,other_payment_plans_stores,0.020833333333333332
+42,German Credit,k-means,housing_own,0.020833333333333332
+43,German Credit,k-means,housing_rent,0.020833333333333332
+44,German Credit,k-means,job_unemp/unskilled non res,0.020833333333333332
+45,German Credit,k-means,job_unskilled resident,0.020833333333333332
+46,German Credit,k-means,job_skilled,0.020833333333333332
+47,German Credit,k-means,own_telephone_yes,0.020833333333333332
+48,German Credit,k-means,foreign_worker_yes,0.020833333333333332

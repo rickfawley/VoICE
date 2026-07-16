@@ -1,0 +1,14 @@
+rank,dataset,algorithm,feature,weight
+1,Wine,k-means,alcohol,0.07692307692307693
+2,Wine,k-means,malic_acid,0.07692307692307693
+3,Wine,k-means,ash,0.07692307692307693
+4,Wine,k-means,alcalinity_of_ash,0.07692307692307693
+5,Wine,k-means,magnesium,0.07692307692307693
+6,Wine,k-means,total_phenols,0.07692307692307693
+7,Wine,k-means,flavanoids,0.07692307692307693
+8,Wine,k-means,nonflavanoid_phenols,0.07692307692307693
+9,Wine,k-means,proanthocyanins,0.07692307692307693
+10,Wine,k-means,color_intensity,0.07692307692307693
+11,Wine,k-means,hue,0.07692307692307693
+12,Wine,k-means,od280_od315_of_diluted_wines,0.07692307692307693
+13,Wine,k-means,proline,0.07692307692307693

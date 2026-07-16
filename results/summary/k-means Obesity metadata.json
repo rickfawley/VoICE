@@ -1,0 +1,66 @@
+{
+  "algorithm": "k-means",
+  "dataset": "Obesity",
+  "folder_name": "k-means Obesity (ARI=0.1010)",
+  "experiment_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)",
+  "summary_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary",
+  "history_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\history",
+  "n_clusters": 7,
+  "seed": 42,
+  "n_init": 10,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "inertia": 29808.386735483666,
+  "ARI": 0.10102765120231616,
+  "n_observations": 2111,
+  "n_features": 22,
+  "feature_names": [
+    "Age",
+    "Height",
+    "FCVC",
+    "NCP",
+    "CH2O",
+    "FAF",
+    "TUE",
+    "Gender_Male",
+    "family_history_with_overweight_yes",
+    "FAVC_yes",
+    "CAEC_Frequently",
+    "CAEC_Sometimes",
+    "CAEC_no",
+    "SMOKE_yes",
+    "SCC_yes",
+    "CALC_Frequently",
+    "CALC_Sometimes",
+    "CALC_no",
+    "MTRANS_Bike",
+    "MTRANS_Motorbike",
+    "MTRANS_Public_Transportation",
+    "MTRANS_Walking"
+  ],
+  "create_timestamped_dataset": false,
+  "timestamp": null,
+  "paths": {
+    "experiment": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)\\k-means Obesity dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)\\k-means Obesity centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)\\k-means Obesity feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)\\k-means Obesity alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\k-means Obesity (ARI=0.1010)\\k-means Obesity metadata.json"
+    },
+    "summary": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Obesity dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Obesity centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Obesity feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Obesity alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\k-means Obesity metadata.json"
+    },
+    "history": {
+      "dataset": null,
+      "centroids": null,
+      "feature_weights": null,
+      "alpha_100_by_cluster": null,
+      "metadata": null
+    }
+  }
+}

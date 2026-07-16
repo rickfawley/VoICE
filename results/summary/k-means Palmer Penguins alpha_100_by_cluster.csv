@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Palmer Penguins,k-means,Unweighted k-means,0,87,0.9893549112643493,87,100.0,0.0,0.3709400401884565,0.9893549112643493
+Palmer Penguins,k-means,Unweighted k-means,1,123,0.6767622979364194,123,100.0,0.0,0.09000060332442508,0.6767622979364194
+Palmer Penguins,k-means,Unweighted k-means,2,132,0.9580439243793857,132,100.0,0.0,0.10505096474359354,0.9580439243793857

@@ -1,0 +1,13 @@
+rank,dataset,algorithm,feature,weight
+1,Heart Failure,k-means,age,0.08333333333333333
+2,Heart Failure,k-means,anaemia,0.08333333333333333
+3,Heart Failure,k-means,creatinine_phosphokinase,0.08333333333333333
+4,Heart Failure,k-means,diabetes,0.08333333333333333
+5,Heart Failure,k-means,ejection_fraction,0.08333333333333333
+6,Heart Failure,k-means,high_blood_pressure,0.08333333333333333
+7,Heart Failure,k-means,platelets,0.08333333333333333
+8,Heart Failure,k-means,serum_creatinine,0.08333333333333333
+9,Heart Failure,k-means,serum_sodium,0.08333333333333333
+10,Heart Failure,k-means,sex,0.08333333333333333
+11,Heart Failure,k-means,smoking,0.08333333333333333
+12,Heart Failure,k-means,time,0.08333333333333333

@@ -1,0 +1,6 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Student Performance,k-means,Unweighted k-means,0,73,0.9546250367985473,73,100.0,0.0,0.42322644945790655,0.9546250367985473
+Student Performance,k-means,Unweighted k-means,1,84,0.9849107803895757,84,100.0,0.0,0.33572242724243717,0.9849107803895757
+Student Performance,k-means,Unweighted k-means,2,144,0.9840515780810497,144,100.0,0.0,0.27076576376901995,0.9840515780810497
+Student Performance,k-means,Unweighted k-means,3,287,0.9803072113728922,287,100.0,0.0,0.2529687728504471,0.9803072113728922
+Student Performance,k-means,Unweighted k-means,4,61,0.8901516903655678,61,100.0,0.0,0.3852768355498769,0.8901516903655678

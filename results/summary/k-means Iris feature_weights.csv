@@ -1,0 +1,5 @@
+rank,dataset,algorithm,feature,weight
+1,Iris,k-means,sepal_length,0.25
+2,Iris,k-means,sepal_width,0.25
+3,Iris,k-means,petal_length,0.25
+4,Iris,k-means,petal_width,0.25

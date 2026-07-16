@@ -1,0 +1,7 @@
+rank,dataset,algorithm,feature,weight
+1,Wholesale Customers,SHARK,Grocery,0.2590689655311062
+2,Wholesale Customers,SHARK,Detergents_Paper,0.2513807758159781
+3,Wholesale Customers,SHARK,Milk,0.22270909778948195
+4,Wholesale Customers,SHARK,Delicassen,0.09521772700029704
+5,Wholesale Customers,SHARK,Fresh,0.08776352502337298
+6,Wholesale Customers,SHARK,Frozen,0.08385990883976373

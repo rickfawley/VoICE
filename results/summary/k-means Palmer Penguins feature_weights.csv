@@ -1,0 +1,5 @@
+rank,dataset,algorithm,feature,weight
+1,Palmer Penguins,k-means,bill_length_mm,0.25
+2,Palmer Penguins,k-means,bill_depth_mm,0.25
+3,Palmer Penguins,k-means,flipper_length_mm,0.25
+4,Palmer Penguins,k-means,body_mass_g,0.25

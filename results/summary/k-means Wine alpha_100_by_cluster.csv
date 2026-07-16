@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Wine,k-means,Unweighted k-means,0,65,0.8911233276631206,65,100.0,0.0,0.31456389016050523,0.8911233276631206
+Wine,k-means,Unweighted k-means,1,51,0.9454695850561792,51,100.0,0.0,0.12656394221277995,0.9454695850561792
+Wine,k-means,Unweighted k-means,2,62,0.9152029201455798,62,100.0,0.0,0.06540822171780804,0.9152029201455798

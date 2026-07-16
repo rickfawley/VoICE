@@ -1,0 +1,3 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+German Credit,k-means,Unweighted k-means,0,486,0.9713178226640994,486,100.0,0.0,0.07279855050252579,0.9713178226640994
+German Credit,k-means,Unweighted k-means,1,514,0.9942891419237442,514,100.0,0.0,0.0020684135918178897,0.9942891419237442

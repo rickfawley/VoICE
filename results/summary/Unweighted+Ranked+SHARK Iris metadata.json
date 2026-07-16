@@ -1,0 +1,53 @@
+{
+  "export_type": "model_level_evaluation",
+  "dataset": "Iris",
+  "folder_name": "Unweighted+Ranked+SHARK Iris",
+  "experiment_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris",
+  "summary_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary",
+  "history_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\history",
+  "n_clusters": 3,
+  "seed": 42,
+  "n_init": 10,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "n_factuals": 50,
+  "cf_modes": [
+    "Unweighted k-means",
+    "Ranked k-means",
+    "Ranked + weighted SHARK"
+  ],
+  "alpha_mode": "Calculated from target cluster",
+  "manual_alpha": 1.0,
+  "alpha_retain_fraction": 1.0,
+  "sidebar_mask": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "create_timestamped_dataset": false,
+  "timestamp": null,
+  "paths": {
+    "experiment": {
+      "least_cost_metrics": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris\\Unweighted+Ranked+SHARK Iris least_cost_metrics.csv",
+      "parsimonious_metrics": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris\\Unweighted+Ranked+SHARK Iris parsimonious_metrics.csv",
+      "least_cost_results": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris\\Unweighted+Ranked+SHARK Iris least_cost_results.csv",
+      "parsimonious_results": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris\\Unweighted+Ranked+SHARK Iris parsimonious_results.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\Unweighted+Ranked+SHARK Iris\\Unweighted+Ranked+SHARK Iris metadata.json"
+    },
+    "summary": {
+      "least_cost_metrics": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\Unweighted+Ranked+SHARK Iris least_cost_metrics.csv",
+      "parsimonious_metrics": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\Unweighted+Ranked+SHARK Iris parsimonious_metrics.csv",
+      "least_cost_results": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\Unweighted+Ranked+SHARK Iris least_cost_results.csv",
+      "parsimonious_results": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\Unweighted+Ranked+SHARK Iris parsimonious_results.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\Unweighted+Ranked+SHARK Iris metadata.json"
+    },
+    "history": {
+      "least_cost_metrics": null,
+      "parsimonious_metrics": null,
+      "least_cost_results": null,
+      "parsimonious_results": null,
+      "metadata": null
+    }
+  }
+}

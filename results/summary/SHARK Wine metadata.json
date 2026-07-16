@@ -1,0 +1,57 @@
+{
+  "algorithm": "SHARK",
+  "dataset": "Wine",
+  "folder_name": "SHARK Wine (ARI=0.8224)",
+  "experiment_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)",
+  "summary_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary",
+  "history_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\history",
+  "n_clusters": 3,
+  "seed": 42,
+  "n_init": 10,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "inertia": 81.14812437082668,
+  "ARI": 0.822382980225598,
+  "n_observations": 178,
+  "n_features": 13,
+  "feature_names": [
+    "alcohol",
+    "malic_acid",
+    "ash",
+    "alcalinity_of_ash",
+    "magnesium",
+    "total_phenols",
+    "flavanoids",
+    "nonflavanoid_phenols",
+    "proanthocyanins",
+    "color_intensity",
+    "hue",
+    "od280_od315_of_diluted_wines",
+    "proline"
+  ],
+  "create_timestamped_dataset": false,
+  "timestamp": null,
+  "paths": {
+    "experiment": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)\\SHARK Wine dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)\\SHARK Wine centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)\\SHARK Wine feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)\\SHARK Wine alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Wine (ARI=0.8224)\\SHARK Wine metadata.json"
+    },
+    "summary": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Wine dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Wine centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Wine feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Wine alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Wine metadata.json"
+    },
+    "history": {
+      "dataset": null,
+      "centroids": null,
+      "feature_weights": null,
+      "alpha_100_by_cluster": null,
+      "metadata": null
+    }
+  }
+}

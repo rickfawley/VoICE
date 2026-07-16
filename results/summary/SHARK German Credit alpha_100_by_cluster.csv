@@ -1,0 +1,3 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+German Credit,SHARK,Ranked + weighted SHARK,0,40,0.0,40,100.0,0.0,0.0,0.0
+German Credit,SHARK,Ranked + weighted SHARK,1,960,1.3642420526594593e-16,960,100.0,0.0,0.0,1.3642420526594593e-16

@@ -1,0 +1,4 @@
+dataset,algorithm,cf_mode,cluster,n_points,alpha_100,retained_points,retained_pct,min_score,median_score,max_score
+Iris,k-means,Unweighted k-means,0,53,0.9838316312572207,53,100.0,0.0,0.362970892786389,0.9838316312572207
+Iris,k-means,Unweighted k-means,1,50,0.8507238734290548,50,100.0,0.0,0.0725402634348643,0.8507238734290548
+Iris,k-means,Unweighted k-means,2,47,0.9568464819465536,47,100.0,0.0,0.07859270811235984,0.9568464819465536

@@ -1,0 +1,31 @@
+rank,dataset,algorithm,feature,weight
+1,Breast Cancer,SHARK,concave points_mean,0.06463703850442386
+2,Breast Cancer,SHARK,concave points_worst,0.057476141809301266
+3,Breast Cancer,SHARK,concavity_mean,0.05284203025954184
+4,Breast Cancer,SHARK,perimeter_worst,0.05206927225264199
+5,Breast Cancer,SHARK,radius_worst,0.04976691397236538
+6,Breast Cancer,SHARK,perimeter_mean,0.04564884144972366
+7,Breast Cancer,SHARK,area_worst,0.045048409257935636
+8,Breast Cancer,SHARK,radius_mean,0.042840896794195525
+9,Breast Cancer,SHARK,area_mean,0.041673556425175146
+10,Breast Cancer,SHARK,concavity_worst,0.039884241659830476
+11,Breast Cancer,SHARK,compactness_mean,0.03793368354108213
+12,Breast Cancer,SHARK,compactness_worst,0.033203887178033666
+13,Breast Cancer,SHARK,radius_se,0.03263183122513958
+14,Breast Cancer,SHARK,perimeter_se,0.03180564745763291
+15,Breast Cancer,SHARK,area_se,0.030735541942002797
+16,Breast Cancer,SHARK,concave points_se,0.02687207601832466
+17,Breast Cancer,SHARK,compactness_se,0.024429433203690263
+18,Breast Cancer,SHARK,symmetry_worst,0.024275621490041137
+19,Breast Cancer,SHARK,smoothness_worst,0.024095700480203576
+20,Breast Cancer,SHARK,smoothness_mean,0.023857688251690254
+21,Breast Cancer,SHARK,symmetry_mean,0.023803516950911614
+22,Breast Cancer,SHARK,concavity_se,0.023760637712317408
+23,Breast Cancer,SHARK,fractal_dimension_worst,0.023247485276835237
+24,Breast Cancer,SHARK,texture_worst,0.023087615658513104
+25,Breast Cancer,SHARK,texture_mean,0.022786808832202486
+26,Breast Cancer,SHARK,fractal_dimension_se,0.021148207220378724
+27,Breast Cancer,SHARK,fractal_dimension_mean,0.02021380205413536
+28,Breast Cancer,SHARK,symmetry_se,0.020194893094472952
+29,Breast Cancer,SHARK,texture_se,0.020017793932068418
+30,Breast Cancer,SHARK,smoothness_se,0.02001078609518879

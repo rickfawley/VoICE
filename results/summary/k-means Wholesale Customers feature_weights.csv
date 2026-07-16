@@ -1,0 +1,7 @@
+rank,dataset,algorithm,feature,weight
+1,Wholesale Customers,k-means,Fresh,0.16666666666666666
+2,Wholesale Customers,k-means,Milk,0.16666666666666666
+3,Wholesale Customers,k-means,Grocery,0.16666666666666666
+4,Wholesale Customers,k-means,Frozen,0.16666666666666666
+5,Wholesale Customers,k-means,Detergents_Paper,0.16666666666666666
+6,Wholesale Customers,k-means,Delicassen,0.16666666666666666

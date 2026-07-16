@@ -1,0 +1,48 @@
+{
+  "algorithm": "SHARK",
+  "dataset": "Palmer Penguins",
+  "folder_name": "SHARK Palmer Penguins (ARI=0.6091)",
+  "experiment_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)",
+  "summary_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary",
+  "history_dir": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\history",
+  "n_clusters": 3,
+  "seed": 42,
+  "n_init": 10,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "inertia": 86.40526007941313,
+  "ARI": 0.6091032343342683,
+  "n_observations": 342,
+  "n_features": 4,
+  "feature_names": [
+    "bill_length_mm",
+    "bill_depth_mm",
+    "flipper_length_mm",
+    "body_mass_g"
+  ],
+  "create_timestamped_dataset": false,
+  "timestamp": null,
+  "paths": {
+    "experiment": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)\\SHARK Palmer Penguins dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)\\SHARK Palmer Penguins centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)\\SHARK Palmer Penguins feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)\\SHARK Palmer Penguins alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\experiments\\SHARK Palmer Penguins (ARI=0.6091)\\SHARK Palmer Penguins metadata.json"
+    },
+    "summary": {
+      "dataset": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Palmer Penguins dataset.csv",
+      "centroids": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Palmer Penguins centroids.csv",
+      "feature_weights": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Palmer Penguins feature_weights.csv",
+      "alpha_100_by_cluster": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Palmer Penguins alpha_100_by_cluster.csv",
+      "metadata": "J:\\Code\\Python\\PhD\\scripts\\VoICE\\results\\summary\\SHARK Palmer Penguins metadata.json"
+    },
+    "history": {
+      "dataset": null,
+      "centroids": null,
+      "feature_weights": null,
+      "alpha_100_by_cluster": null,
+      "metadata": null
+    }
+  }
+}
