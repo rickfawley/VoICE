@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from src.config import MODEL_LEVEL_PUBLICATION_MODES
 from src.evaluation import safe_adjusted_rand_index
-
 
 def safe_path_name(value):
     """
@@ -464,6 +464,235 @@ def export_cluster_solution(
     )
 
     return experiment_dir
+
+def export_table3_repeated_results(
+    *,
+    df_table3_iterations,
+    table3_standard_deviations,
+    dataset_name,
+    n_clusters,
+    seed,
+    n_init,
+    max_iter,
+    tol,
+    n_factuals,
+    alpha_mode,
+    manual_alpha,
+    alpha_retain_fraction,
+    sidebar_mask,
+    results_dir="results",
+    create_timestamped_dataset=False,
+):
+    """
+    Export the repetition-level values and standard deviations
+    used to populate Table 3.
+    """
+
+    results_dir = Path(results_dir)
+
+    experiments_dir = results_dir / "experiments"
+    summary_dir = results_dir / "summary"
+    history_dir = results_dir / "history"
+
+    experiments_dir.mkdir(parents=True, exist_ok=True)
+    summary_dir.mkdir(parents=True, exist_ok=True)
+    history_dir.mkdir(parents=True, exist_ok=True)
+
+    export_name = build_model_level_export_name(
+        dataset_name=dataset_name,
+        n_clusters=n_clusters,
+        seed=seed,
+        n_init=n_init,
+        max_iter=max_iter,
+        tol=tol,
+        n_factuals=n_factuals,
+        cf_modes=MODEL_LEVEL_PUBLICATION_MODES,
+        alpha_mode=alpha_mode,
+        manual_alpha=manual_alpha,
+        alpha_retain_fraction=alpha_retain_fraction,
+        sidebar_mask=sidebar_mask,
+    )
+
+    experiment_dir = experiments_dir / export_name
+    experiment_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    timestamp = None
+
+    if create_timestamped_dataset:
+        timestamp = datetime.now().strftime(
+            "%Y%m%d_%H%M%S_%f"
+        )
+
+    df_iterations = df_table3_iterations.copy()
+
+    if "dataset" not in df_iterations.columns:
+        df_iterations.insert(
+            0,
+            "dataset",
+            dataset_name,
+        )
+
+    df_std = pd.DataFrame(
+        [
+            {
+                "dataset": dataset_name,
+                "n_clusters": int(n_clusters),
+                "n_factuals": int(n_factuals),
+                "max_iter": int(max_iter),
+                "tol": float(tol),
+                "alpha_mode": alpha_mode,
+                "manual_alpha": float(manual_alpha),
+                "alpha_retain_fraction": float(
+                    alpha_retain_fraction
+                ),
+                **table3_standard_deviations,
+            }
+        ]
+    )
+
+    write_csv_export(
+        df=df_iterations,
+        experiment_dir=experiment_dir,
+        summary_dir=summary_dir,
+        history_dir=history_dir,
+        master_stem=f"{export_name} table3_iterations",
+        history_stem=f"{export_name} table3_iterations",
+        timestamp=timestamp,
+    )
+
+    write_csv_export(
+        df=df_std,
+        experiment_dir=experiment_dir,
+        summary_dir=summary_dir,
+        history_dir=history_dir,
+        master_stem=(
+            f"{export_name} table3_standard_deviations"
+        ),
+        history_stem=(
+            f"{export_name} table3_standard_deviations"
+        ),
+        timestamp=timestamp,
+    )
+
+    return experiment_dir
+
+def export_table4_repeated_results(
+    *,
+    df_table4_iterations,
+    table4_standard_deviations,
+    dataset_name,
+    n_clusters,
+    seed,
+    n_init,
+    max_iter,
+    tol,
+    n_factuals,
+    alpha_mode,
+    manual_alpha,
+    alpha_retain_fraction,
+    sidebar_mask,
+    results_dir="results",
+    create_timestamped_dataset=False,
+):
+    """
+    Export the repetition-level values and standard deviations
+    used to populate Table 4.
+    """
+
+    results_dir = Path(results_dir)
+
+    experiments_dir = results_dir / "experiments"
+    summary_dir = results_dir / "summary"
+    history_dir = results_dir / "history"
+
+    experiments_dir.mkdir(parents=True, exist_ok=True)
+    summary_dir.mkdir(parents=True, exist_ok=True)
+    history_dir.mkdir(parents=True, exist_ok=True)
+
+    export_name = build_model_level_export_name(
+        dataset_name=dataset_name,
+        n_clusters=n_clusters,
+        seed=seed,
+        n_init=n_init,
+        max_iter=max_iter,
+        tol=tol,
+        n_factuals=n_factuals,
+        cf_modes=MODEL_LEVEL_PUBLICATION_MODES,
+        alpha_mode=alpha_mode,
+        manual_alpha=manual_alpha,
+        alpha_retain_fraction=alpha_retain_fraction,
+        sidebar_mask=sidebar_mask,
+    )
+
+    experiment_dir = experiments_dir / export_name
+    experiment_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    timestamp = None
+
+    if create_timestamped_dataset:
+        timestamp = datetime.now().strftime(
+            "%Y%m%d_%H%M%S_%f"
+        )
+
+    df_iterations = df_table4_iterations.copy()
+
+    if "dataset" not in df_iterations.columns:
+        df_iterations.insert(
+            0,
+            "dataset",
+            dataset_name,
+        )
+
+    df_std = pd.DataFrame(
+        [
+            {
+                "dataset": dataset_name,
+                "n_clusters": int(n_clusters),
+                "n_factuals": int(n_factuals),
+                "max_iter": int(max_iter),
+                "tol": float(tol),
+                "alpha_mode": alpha_mode,
+                "manual_alpha": float(manual_alpha),
+                "alpha_retain_fraction": float(
+                    alpha_retain_fraction
+                ),
+                **table4_standard_deviations,
+            }
+        ]
+    )
+
+    write_csv_export(
+        df=df_iterations,
+        experiment_dir=experiment_dir,
+        summary_dir=summary_dir,
+        history_dir=history_dir,
+        master_stem=f"{export_name} table4_iterations",
+        history_stem=f"{export_name} table4_iterations",
+        timestamp=timestamp,
+    )
+
+    write_csv_export(
+        df=df_std,
+        experiment_dir=experiment_dir,
+        summary_dir=summary_dir,
+        history_dir=history_dir,
+        master_stem=(
+            f"{export_name} table4_standard_deviations"
+        ),
+        history_stem=(
+            f"{export_name} table4_standard_deviations"
+        ),
+        timestamp=timestamp,
+    )
+
+    return experiment_dir
+
 
 def build_model_level_export_name(
     *,

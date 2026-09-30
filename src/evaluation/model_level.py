@@ -2,6 +2,10 @@ import time
 import numpy as np
 import pandas as pd
 
+from src.config import MODEL_LEVEL_PUBLICATION_MODES
+
+from src.models import fit_clustering
+
 from src.geometry import (
     build_alpha_halfspaces,
     calculate_alpha_for_target_cluster,
@@ -370,6 +374,202 @@ def aggregate_voice_results(df_results):
 
     return df_summary
 
+def build_model_level_mode_config(
+    kmeans_result,
+    shark_result,
+    feature_names,
+):
+    """
+    Build the mode configuration for one independently fitted
+    pair of k-means and SHARK models.
+    """
+    feature_names = list(feature_names)
+
+    d = len(feature_names)
+    equal_weights = np.ones(d, dtype=float) / d
+
+    def get_mode_config(cf_mode):
+
+        if cf_mode == "Unweighted k-means":
+            return (
+                kmeans_result,
+                equal_weights,
+                equal_weights,
+                feature_names.copy(),
+            )
+
+        if cf_mode == "Ranked k-means":
+            ranking_weights = np.asarray(
+                shark_result.weights,
+                dtype=float,
+            )
+
+            ranked_features = [
+                feature_names[i]
+                for i in np.argsort(-ranking_weights)
+            ]
+
+            return (
+                kmeans_result,
+                ranking_weights,
+                equal_weights,
+                ranked_features,
+            )
+
+        if cf_mode == "Ranked + weighted SHARK":
+            ranking_weights = np.asarray(
+                shark_result.weights,
+                dtype=float,
+            )
+
+            ranked_features = [
+                feature_names[i]
+                for i in np.argsort(-ranking_weights)
+            ]
+
+            return (
+                shark_result,
+                ranking_weights,
+                ranking_weights,
+                ranked_features,
+            )
+
+        raise ValueError(
+            f"Unknown counterfactual comparison mode: {cf_mode}"
+        )
+
+    return get_mode_config
+
+def table3_metrics_from_summary(
+    df_summary,
+    n_features,
+):
+    """
+    Reduce one clustering repetition to the four metrics
+    reported in Table 3.
+
+    Table 3 uses:
+      - least-cost counterfactuals;
+      - all features mutable;
+      - contracted target regions;
+      - the mean across the three publication modes.
+    """
+
+    table3_rows = df_summary[
+        (df_summary["solution_type"] == "least_cost")
+        & (df_summary["mask_scenario"] == "All features mutable")
+        & (df_summary["alpha_case"] == "α < 1")
+        & (
+            df_summary["cf_mode"].isin(
+                MODEL_LEVEL_PUBLICATION_MODES
+            )
+        )
+    ].copy()
+
+    expected_modes = set(MODEL_LEVEL_PUBLICATION_MODES)
+    present_modes = set(table3_rows["cf_mode"])
+
+    if present_modes != expected_modes:
+        missing_modes = expected_modes - present_modes
+
+        raise RuntimeError(
+            "Table 3 requires all publication modes. "
+            f"Missing modes: {sorted(missing_modes)}"
+        )
+
+    if len(table3_rows) != len(MODEL_LEVEL_PUBLICATION_MODES):
+        raise RuntimeError(
+            "Expected exactly one Table 3 summary row per mode, "
+            f"but found {len(table3_rows)} rows."
+        )
+
+    return {
+        "changed_features_pct": float(
+            100.0
+            * table3_rows["mean_changed_features"].mean()
+            / int(n_features)
+        ),
+        "weighted_cost": float(
+            table3_rows["mean_weighted_cost"].mean()
+        ),
+        "mean_tau": float(
+            table3_rows["mean_tau"].mean()
+        ),
+        "runtime_ms": float(
+            table3_rows["mean_runtime_ms"].mean()
+        ),
+        "minimum_feasibility_rate": float(
+            table3_rows["feasibility_rate"].min()
+        ),
+    }
+
+def table4_metrics_from_summary(
+    df_summary,
+    n_features,
+):
+    """
+    Reduce one clustering repetition to the four metrics
+    reported in Table 4.
+
+    Table 4 uses:
+      - most-parsimonious counterfactuals;
+      - all features mutable;
+      - contracted target regions;
+      - the mean across the three publication modes.
+    """
+
+    table4_rows = df_summary[
+        (df_summary["solution_type"] == "most_parsimonious")
+        & (df_summary["mask_scenario"] == "All features mutable")
+        & (df_summary["alpha_case"] == "α < 1")
+        & (
+            df_summary["cf_mode"].isin(
+                MODEL_LEVEL_PUBLICATION_MODES
+            )
+        )
+    ].copy()
+
+    expected_modes = set(MODEL_LEVEL_PUBLICATION_MODES)
+    present_modes = set(table4_rows["cf_mode"])
+
+    if present_modes != expected_modes:
+        missing_modes = expected_modes - present_modes
+
+        raise RuntimeError(
+            "Table 4 requires all publication modes. "
+            f"Missing modes: {sorted(missing_modes)}"
+        )
+
+    if len(table4_rows) != len(MODEL_LEVEL_PUBLICATION_MODES):
+        raise RuntimeError(
+            "Expected exactly one Table 4 summary row per mode, "
+            f"but found {len(table4_rows)} rows."
+        )
+
+    mean_r_star = float(
+        table4_rows[
+            "mean_minimal_intervention_cardinality"
+        ].mean()
+    )
+
+    return {
+        "mean_r_star": mean_r_star,
+        "r_star_over_d": float(
+            mean_r_star / int(n_features)
+        ),
+        "single_feature_feasibility_rate": float(
+            table4_rows[
+                "single_feature_feasibility_rate"
+            ].mean()
+        ),
+        "mean_tau": float(
+            table4_rows["mean_tau"].mean()
+        ),
+        "minimum_feasibility_rate": float(
+            table4_rows["feasibility_rate"].min()
+        ),
+    }
+
 
 def run_model_level_evaluation(
     X_cluster,
@@ -489,3 +689,240 @@ def run_model_level_evaluation(
     df_summary = aggregate_voice_results(df_results)
 
     return df_results, df_summary
+
+def run_repeated_model_level_evaluation(
+    *,
+    X_cluster,
+    feature_names,
+    sidebar_mask,
+    n_factuals,
+    n_clusters,
+    alpha_mode,
+    manual_alpha,
+    alpha_retain_fraction,
+    n_iterations=50,
+    base_clustering_seed=42,
+    evaluation_seed=42,
+    n_init=10,
+    max_iter=300,
+    tol=1e-4,
+):
+    """
+    Repeat the model-level publication evaluation across
+    independently fitted clustering solutions.
+    """
+
+    repeated_summary_frames = []
+    table3_iteration_rows = []
+    table4_iteration_rows = []
+
+    for iteration in range(int(n_iterations)):
+
+        clustering_seed = (
+            int(base_clustering_seed) + iteration
+        )
+
+        kmeans_result = fit_clustering(
+            X_cluster,
+            method="k-means",
+            n_clusters=int(n_clusters),
+            seed=clustering_seed,
+            n_init=int(n_init),
+            max_iter=int(max_iter),
+            tol=float(tol),
+        )
+
+        shark_result = fit_clustering(
+            X_cluster,
+            method="SHARK",
+            n_clusters=int(n_clusters),
+            seed=clustering_seed,
+            n_init=int(n_init),
+            max_iter=int(max_iter),
+            tol=float(tol),
+        )
+
+        mode_config_fn = build_model_level_mode_config(
+            kmeans_result=kmeans_result,
+            shark_result=shark_result,
+            feature_names=feature_names,
+        )
+
+        _, df_summary = run_model_level_evaluation(
+            X_cluster=X_cluster,
+            feature_names=feature_names,
+            cf_modes=MODEL_LEVEL_PUBLICATION_MODES,
+            mode_config_fn=mode_config_fn,
+            sidebar_mask=sidebar_mask,
+            n_factuals=int(n_factuals),
+            seed=int(evaluation_seed),
+            n_clusters=int(n_clusters),
+            alpha_mode=alpha_mode,
+            manual_alpha=manual_alpha,
+            alpha_retain_fraction=alpha_retain_fraction,
+        )
+
+        table3_metrics = table3_metrics_from_summary(
+            df_summary=df_summary,
+            n_features=len(feature_names),
+        )
+
+        table3_iteration_rows.append(
+            {
+                "iteration": iteration + 1,
+                "clustering_seed": clustering_seed,
+                "evaluation_seed": int(evaluation_seed),
+                **table3_metrics,
+            }
+        )
+
+        table4_metrics = table4_metrics_from_summary(
+            df_summary=df_summary,
+            n_features=len(feature_names),
+        )
+
+        table4_iteration_rows.append(
+            {
+                "iteration": iteration + 1,
+                "clustering_seed": clustering_seed,
+                "evaluation_seed": int(evaluation_seed),
+                **table4_metrics,
+            }
+        )
+
+        df_summary = df_summary.copy()
+
+        df_summary.insert(
+            0,
+            "iteration",
+            iteration + 1,
+        )
+        df_summary.insert(
+            1,
+            "clustering_seed",
+            clustering_seed,
+        )
+        df_summary.insert(
+            2,
+            "evaluation_seed",
+            int(evaluation_seed),
+        )
+
+        repeated_summary_frames.append(df_summary)
+
+    df_repeated_summary = pd.concat(
+        repeated_summary_frames,
+        ignore_index=True,
+    )
+
+    df_table3_iterations = pd.DataFrame(
+        table3_iteration_rows
+    )
+
+    df_table4_iterations = pd.DataFrame(
+        table4_iteration_rows
+    )
+
+    if len(df_table3_iterations) < 2:
+        changed_features_pct_std = np.nan
+        weighted_cost_std = np.nan
+        mean_tau_std = np.nan
+        runtime_ms_std = np.nan
+    else:
+        changed_features_pct_std = float(
+            df_table3_iterations[
+                "changed_features_pct"
+            ].std(ddof=1)
+        )
+
+        weighted_cost_std = float(
+            df_table3_iterations[
+                "weighted_cost"
+            ].std(ddof=1)
+        )
+
+        mean_tau_std = float(
+            df_table3_iterations[
+                "mean_tau"
+            ].std(ddof=1)
+        )
+
+        runtime_ms_std = float(
+            df_table3_iterations[
+                "runtime_ms"
+            ].std(ddof=1)
+        )
+
+    table3_standard_deviations = {
+        "n_iterations": int(len(df_table3_iterations)),
+        "base_clustering_seed": int(base_clustering_seed),
+        "evaluation_seed": int(evaluation_seed),
+        "n_init": int(n_init),
+        "sd_ddof": 1,
+        "changed_features_pct_std": changed_features_pct_std,
+        "weighted_cost_std": weighted_cost_std,
+        "mean_tau_std": mean_tau_std,
+        "runtime_ms_std": runtime_ms_std,
+        "minimum_feasibility_rate": float(
+            df_table3_iterations[
+                "minimum_feasibility_rate"
+            ].min()
+        ),
+    }
+
+    if len(df_table4_iterations) < 2:
+        mean_r_star_std = np.nan
+        r_star_over_d_std = np.nan
+        single_feature_feasibility_rate_std = np.nan
+        table4_mean_tau_std = np.nan
+    else:
+        mean_r_star_std = float(
+            df_table4_iterations[
+                "mean_r_star"
+            ].std(ddof=1)
+        )
+
+        r_star_over_d_std = float(
+            df_table4_iterations[
+                "r_star_over_d"
+            ].std(ddof=1)
+        )
+
+        single_feature_feasibility_rate_std = float(
+            df_table4_iterations[
+                "single_feature_feasibility_rate"
+            ].std(ddof=1)
+        )
+
+        table4_mean_tau_std = float(
+            df_table4_iterations[
+                "mean_tau"
+            ].std(ddof=1)
+        )
+
+    table4_standard_deviations = {
+        "n_iterations": int(len(df_table4_iterations)),
+        "base_clustering_seed": int(base_clustering_seed),
+        "evaluation_seed": int(evaluation_seed),
+        "n_init": int(n_init),
+        "sd_ddof": 1,
+        "mean_r_star_std": mean_r_star_std,
+        "r_star_over_d_std": r_star_over_d_std,
+        "single_feature_feasibility_rate_std": (
+            single_feature_feasibility_rate_std
+        ),
+        "mean_tau_std": table4_mean_tau_std,
+        "minimum_feasibility_rate": float(
+            df_table4_iterations[
+                "minimum_feasibility_rate"
+            ].min()
+        ),
+    }
+
+    return (
+        df_repeated_summary,
+        df_table3_iterations,
+        table3_standard_deviations,
+        df_table4_iterations,
+        table4_standard_deviations,
+    )

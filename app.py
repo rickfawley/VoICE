@@ -22,6 +22,8 @@ from src.models.weighted_kmeans import fit_clustering
 from src.results_export import (
     export_cluster_solution,
     export_model_level_evaluation_tables,
+    export_table3_repeated_results,
+    export_table4_repeated_results,
 )
 
 from src.ui import (
@@ -44,6 +46,7 @@ from src.views import (
 
 from src.evaluation import (
     run_model_level_evaluation,
+    run_repeated_model_level_evaluation,
     run_kmeans_voronoi_vs_bisector_evaluation,
 )
 
@@ -888,6 +891,19 @@ with tab_model_eval:
         key="n_model_eval_factuals",
     )
 
+    n_model_eval_iterations = st.number_input(
+        "Number of clustering repetitions",
+        min_value=1,
+        max_value=100,
+        value=50,
+        step=1,
+        key="n_model_eval_iterations",
+        help=(
+            "Number of independently seeded clustering fits used "
+            "to calculate the Table 3 and Table 4 standard deviations."
+        ),
+    )
+
     run_model_eval = st.button(
         "Run model-level evaluation",
         key="run_model_level_evaluation",
@@ -911,6 +927,29 @@ with tab_model_eval:
             alpha_retain_fraction=alpha_retain_fraction,
         )
 
+        (
+            df_repeated_eval_summary,
+            df_table3_iterations,
+            table3_standard_deviations,
+            df_table4_iterations,
+            table4_standard_deviations,
+        ) = run_repeated_model_level_evaluation(
+            X_cluster=X_cluster,
+            feature_names=feature_names,
+            sidebar_mask=mask,
+            n_factuals=int(n_model_eval_factuals),
+            n_clusters=n_clusters,
+            alpha_mode=alpha_mode,
+            manual_alpha=manual_alpha,
+            alpha_retain_fraction=alpha_retain_fraction,
+            n_iterations=int(n_model_eval_iterations),
+            base_clustering_seed=int(seed),
+            evaluation_seed=int(seed),
+            n_init=int(n_init),
+            max_iter=int(max_iter),
+            tol=float(tol),
+        )
+
         model_eval_export_dir = export_model_level_evaluation_tables(
             df_eval_results=df_eval_results,
             df_eval_summary=df_eval_summary,
@@ -930,14 +969,89 @@ with tab_model_eval:
             create_timestamped_dataset=create_timestamped_dataset,
         )
 
+        table3_export_dir = export_table3_repeated_results(
+            df_table3_iterations=df_table3_iterations,
+            table3_standard_deviations=table3_standard_deviations,
+            dataset_name=dataset_name,
+            n_clusters=n_clusters,
+            seed=int(seed),
+            n_init=int(n_init),
+            max_iter=int(max_iter),
+            tol=float(tol),
+            n_factuals=int(n_model_eval_factuals),
+            alpha_mode=alpha_mode,
+            manual_alpha=manual_alpha,
+            alpha_retain_fraction=alpha_retain_fraction,
+            sidebar_mask=mask,
+            results_dir=RESULTS_DIR,
+            create_timestamped_dataset=create_timestamped_dataset,
+        )
+
+        table4_export_dir = export_table4_repeated_results(
+            df_table4_iterations=df_table4_iterations,
+            table4_standard_deviations=table4_standard_deviations,
+            dataset_name=dataset_name,
+            n_clusters=n_clusters,
+            seed=int(seed),
+            n_init=int(n_init),
+            max_iter=int(max_iter),
+            tol=float(tol),
+            n_factuals=int(n_model_eval_factuals),
+            alpha_mode=alpha_mode,
+            manual_alpha=manual_alpha,
+            alpha_retain_fraction=alpha_retain_fraction,
+            sidebar_mask=mask,
+            results_dir=RESULTS_DIR,
+            create_timestamped_dataset=create_timestamped_dataset,
+        )
+
         st.success(
             f"Exported model-level evaluation tables to: {model_eval_export_dir}"
         )
 
+        st.success(
+            f"Exported Table 3 repetition results to: {table3_export_dir}"
+        )
 
+        st.success(
+            f"Exported Table 4 repetition results to: {table4_export_dir}"
+        )
 
+        st.subheader("Table 3 Repetition Metrics")
 
+        st.dataframe(
+            df_table3_iterations,
+            hide_index=True,
+            use_container_width=True,
+        )
 
+        st.subheader("Table 3 Standard Deviations")
+
+        st.dataframe(
+            pd.DataFrame(
+                [table3_standard_deviations]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+        st.subheader("Table 4 Repetition Metrics")
+
+        st.dataframe(
+            df_table4_iterations,
+            hide_index=True,
+            use_container_width=True,
+        )
+
+        st.subheader("Table 4 Standard Deviations")
+
+        st.dataframe(
+            pd.DataFrame(
+                [table4_standard_deviations]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
 
         st.subheader("Least-Cost Metrics")
 
@@ -1344,7 +1458,7 @@ with tab_comparative_eval:
         "Number of Experiment Iterations",
         min_value=1,
         max_value=100,
-        value=1,
+        value=50,
         step=1,
         key="comparative_n_iterations",
         help=(
@@ -1539,22 +1653,24 @@ with tab_comparative_eval:
             with st.spinner(
                 "Running k-means Voronoi-region vs Vardakas bisecting-hyperplane comparison..."
             ):
-                df_comparative_results, comparative_summary = (
-                    run_kmeans_voronoi_vs_bisector_evaluation(
-                        X=X_cluster,
-                        feature_names=feature_names,
-                        dataset_name=dataset_name,
-                        n_clusters=n_clusters,
-                        n_iterations=int(n_comparative_iterations),
-                        sampling_mode=sampling_mode,
-                        sample_percentage=sample_percentage,
-                        sample_count_per_cluster=sample_count_per_cluster,
-                        target_cluster_selection_mode=target_cluster_selection_mode,
-                        base_seed=seed,
-                        n_init=1,
-                        max_iter=max_iter,
-                        tol=tol,
-                    )
+                (
+                    df_comparative_results,
+                    comparative_summary,
+                    df_comparative_iteration_summary,
+                ) = run_kmeans_voronoi_vs_bisector_evaluation(
+                    X=X_cluster,
+                    feature_names=feature_names,
+                    dataset_name=dataset_name,
+                    n_clusters=n_clusters,
+                    n_iterations=int(n_comparative_iterations),
+                    sampling_mode=sampling_mode,
+                    sample_percentage=sample_percentage,
+                    sample_count_per_cluster=sample_count_per_cluster,
+                    target_cluster_selection_mode=target_cluster_selection_mode,
+                    base_seed=seed,
+                    n_init=1,
+                    max_iter=max_iter,
+                    tol=tol,
                 )
 
             st.success("Comparative evaluation complete.")
@@ -1664,6 +1780,60 @@ with tab_comparative_eval:
                 key="download_comparative_full_results",
             )
 
+            st.subheader("Iteration-Level Summary")
+
+            st.dataframe(
+                df_comparative_iteration_summary,
+                hide_index=True,
+                use_container_width=True,
+                column_config={
+                    "dataset_name": st.column_config.TextColumn(
+                        "Dataset",
+                    ),
+                    "iteration": st.column_config.NumberColumn(
+                        "Iteration",
+                        format="%d",
+                    ),
+                    "iteration_seed": st.column_config.NumberColumn(
+                        "Seed",
+                        format="%d",
+                    ),
+                    "total_comparisons": st.column_config.NumberColumn(
+                        "Comparisons",
+                        format="%d",
+                    ),
+                    "vardakas_fail_count": st.column_config.NumberColumn(
+                        "CFCLUST failures",
+                        format="%d",
+                    ),
+                    "vardakas_target_cell_validity_rate": st.column_config.NumberColumn(
+                        "CFCLUST validity",
+                        format="%.3f%%",
+                    ),
+                    "voronoi_target_cell_validity_rate": st.column_config.NumberColumn(
+                        "VoICE validity",
+                        format="%.3f%%",
+                    ),
+                    "table2_vardakas_repair_cost": st.column_config.NumberColumn(
+                        "CFCLUST repair cost",
+                        format="%.6f",
+                    ),
+                    "table2_voronoi_repair_cost": st.column_config.NumberColumn(
+                        "VoICE repair cost",
+                        format="%.6f",
+                    ),
+                },
+            )
+
+            st.download_button(
+                label="Download Iteration-Level Comparative Summary CSV",
+                data=df_comparative_iteration_summary.to_csv(
+                    index=False
+                ).encode("utf-8"),
+                file_name="comparative_voronoi_vs_vardakas_iteration_summary.csv",
+                mime="text/csv",
+                key="download_comparative_iteration_summary",
+            )
 
             comparative_summary_help = {
                 "dataset_name": (
@@ -1869,14 +2039,40 @@ with tab_comparative_eval:
                 [
                     {
                         "dataset_name": comparative_summary["dataset_name"],
+                        "n_iterations": comparative_summary["n_iterations"],
                         "total_comparisons": comparative_summary["total_comparisons"],
+
                         "vardakas_target_cell_validity_rate": comparative_summary[
                             "vardakas_target_cell_validity_rate"
                         ],
+                        "vardakas_target_cell_validity_rate_std": comparative_summary[
+                            "vardakas_target_cell_validity_rate_std"
+                        ],
+
                         "voronoi_target_cell_validity_rate": comparative_summary[
                             "voronoi_target_cell_validity_rate"
                         ],
-                        "vardakas_fail_count": comparative_summary["vardakas_fail_count"],
+                        "voronoi_target_cell_validity_rate_std": comparative_summary[
+                            "voronoi_target_cell_validity_rate_std"
+                        ],
+
+                        "table2_vardakas_repair_cost": comparative_summary[
+                            "table2_vardakas_repair_cost"
+                        ],
+                        "table2_vardakas_repair_cost_std": comparative_summary[
+                            "table2_vardakas_repair_cost_std"
+                        ],
+
+                        "table2_voronoi_repair_cost": comparative_summary[
+                            "table2_voronoi_repair_cost"
+                        ],
+                        "table2_voronoi_repair_cost_std": comparative_summary[
+                            "table2_voronoi_repair_cost_std"
+                        ],
+
+                        "vardakas_fail_count": comparative_summary[
+                            "vardakas_fail_count"
+                        ],
                         "vardakas_fail_percentage": comparative_summary[
                             "vardakas_fail_percentage"
                         ],
@@ -1930,15 +2126,51 @@ with tab_comparative_eval:
                         format="%d",
                         help=comparative_summary_help["total_comparisons"],
                     ),
+                    "n_iterations": st.column_config.NumberColumn(
+                        "Iterations",
+                        format="%d",
+                    ),
+
                     "vardakas_target_cell_validity_rate": st.column_config.NumberColumn(
-                        "Vardakas target-cell validity",
+                        "CFCLUST target-cell validity",
                         format="%.1f%%",
                         help=comparative_summary_help["vardakas_target_cell_validity_rate"],
                     ),
+
+                    "vardakas_target_cell_validity_rate_std": st.column_config.NumberColumn(
+                        "CFCLUST validity SD",
+                        format="%.3f",
+                    ),
+
                     "voronoi_target_cell_validity_rate": st.column_config.NumberColumn(
-                        "Voronoi target-cell validity",
+                        "VoICE target-cell validity",
                         format="%.1f%%",
                         help=comparative_summary_help["voronoi_target_cell_validity_rate"],
+                    ),
+
+                    "voronoi_target_cell_validity_rate_std": st.column_config.NumberColumn(
+                        "VoICE validity SD",
+                        format="%.3f",
+                    ),
+
+                    "table2_vardakas_repair_cost": st.column_config.NumberColumn(
+                        "CFCLUST Table 2 repair cost",
+                        format="%.6f",
+                    ),
+
+                    "table2_vardakas_repair_cost_std": st.column_config.NumberColumn(
+                        "CFCLUST repair cost SD",
+                        format="%.6f",
+                    ),
+
+                    "table2_voronoi_repair_cost": st.column_config.NumberColumn(
+                        "VoICE Table 2 repair cost",
+                        format="%.6f",
+                    ),
+
+                    "table2_voronoi_repair_cost_std": st.column_config.NumberColumn(
+                        "VoICE repair cost SD",
+                        format="%.6f",
                     ),
                     "vardakas_fail_count": st.column_config.NumberColumn(
                         "Vardakas fail count",
@@ -2009,6 +2241,52 @@ with tab_comparative_eval:
                 file_name="comparative_voronoi_vs_vardakas_summary.csv",
                 mime="text/csv",
                 key="download_comparative_summary_results",
+            )
+
+
+            table2_publication_row = pd.DataFrame(
+                [
+                    {
+                        "Dataset": comparative_summary["dataset_name"],
+                        "Comparisons": comparative_summary["total_comparisons"],
+
+                        "CFCLUST Val/std": (
+                            f"{comparative_summary['vardakas_target_cell_validity_rate']:.1f}/"
+                            f"{comparative_summary['vardakas_target_cell_validity_rate_std']:.1f}"
+                        ),
+
+                        "CFCLUST Repair Cost/std": (
+                            f"{comparative_summary['table2_vardakas_repair_cost']:.3f}/"
+                            f"{comparative_summary['table2_vardakas_repair_cost_std']:.3f}"
+                        ),
+
+                        "VoICE Val/std": (
+                            f"{comparative_summary['voronoi_target_cell_validity_rate']:.1f}/"
+                            f"{comparative_summary['voronoi_target_cell_validity_rate_std']:.1f}"
+                        ),
+
+                        "VoICE Repair Cost/std": (
+                            f"{comparative_summary['table2_voronoi_repair_cost']:.3f}/"
+                            f"{comparative_summary['table2_voronoi_repair_cost_std']:.3f}"
+                        ),
+                    }
+                ]
+            )
+
+            st.subheader("Table 2 Publication Row")
+
+            st.dataframe(
+                table2_publication_row,
+                hide_index=True,
+                use_container_width=True,
+            )
+
+            st.download_button(
+                label="Download Table 2 Publication Row CSV",
+                data=table2_publication_row.to_csv(index=False).encode("utf-8"),
+                file_name="table2_publication_row.csv",
+                mime="text/csv",
+                key="download_table2_publication_row",
             )
 
 

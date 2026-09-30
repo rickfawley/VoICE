@@ -1,0 +1,2 @@
+dataset,n_clusters,n_factuals,max_iter,tol,alpha_mode,manual_alpha,alpha_retain_fraction,n_iterations,base_clustering_seed,evaluation_seed,n_init,sd_ddof,changed_features_pct_std,weighted_cost_std,mean_tau_std,runtime_ms_std,minimum_feasibility_rate
+Wine,3,50,300,0.0001,Calculated from target cluster,1.0,1.0,50,42,42,10,1,0.0516366598877761,0.01519878680497766,0.06884061645598898,0.19251810369248737,100.0

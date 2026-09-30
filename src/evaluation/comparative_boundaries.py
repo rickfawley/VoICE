@@ -426,6 +426,131 @@ def summarise_comparative_results(df_results, dataset_name=None):
         ),
     }
 
+def summarise_comparative_results_by_iteration(
+    df_results,
+    dataset_name=None,
+):
+    """
+    Reduce the comparative experiment to one summary row per
+    independently fitted k-means iteration.
+
+    These iteration-level values are the source of the standard
+    deviations reported in Table 2.
+    """
+    columns = [
+        "dataset_name",
+        "iteration",
+        "iteration_seed",
+        "total_comparisons",
+        "vardakas_fail_count",
+        "vardakas_target_cell_validity_rate",
+        "voronoi_target_cell_validity_rate",
+        "table2_vardakas_repair_cost",
+        "table2_voronoi_repair_cost",
+    ]
+
+    if df_results.empty:
+        return pd.DataFrame(columns=columns)
+
+    iteration_rows = []
+
+    for (iteration, iteration_seed), group in df_results.groupby(
+        ["iteration", "iteration_seed"],
+        sort=True,
+    ):
+        run_summary = summarise_comparative_results(
+            group,
+            dataset_name=dataset_name,
+        )
+
+        # Table 2 reports repair cost as zero when no repair is required.
+        if run_summary["vardakas_fail_count"] == 0:
+            vardakas_repair_cost = 0.0
+        else:
+            vardakas_repair_cost = run_summary[
+                "mean_repair_cost_on_failures"
+            ]
+
+        iteration_rows.append(
+            {
+                "dataset_name": dataset_name,
+                "iteration": int(iteration),
+                "iteration_seed": int(iteration_seed),
+                "total_comparisons": run_summary["total_comparisons"],
+                "vardakas_fail_count": run_summary["vardakas_fail_count"],
+                "vardakas_target_cell_validity_rate": run_summary[
+                    "vardakas_target_cell_validity_rate"
+                ],
+                "voronoi_target_cell_validity_rate": run_summary[
+                    "voronoi_target_cell_validity_rate"
+                ],
+                "table2_vardakas_repair_cost": vardakas_repair_cost,
+                "table2_voronoi_repair_cost": 0.0,
+            }
+        )
+
+    return pd.DataFrame(iteration_rows)
+
+def add_comparative_iteration_standard_deviations(
+    summary,
+    iteration_summary,
+):
+    """
+    Add Table 2 run-to-run standard deviations to the existing
+    pooled comparative summary.
+
+    The existing pooled values are retained unchanged. Standard
+    deviations are sample standard deviations across independently
+    fitted k-means iterations (ddof=1).
+    """
+    summary = dict(summary)
+
+    n_iterations = int(len(iteration_summary))
+    summary["n_iterations"] = n_iterations
+
+    if n_iterations < 2:
+        summary["vardakas_target_cell_validity_rate_std"] = np.nan
+        summary["voronoi_target_cell_validity_rate_std"] = np.nan
+        summary["table2_vardakas_repair_cost_std"] = np.nan
+        summary["table2_voronoi_repair_cost_std"] = np.nan
+
+    else:
+        summary["vardakas_target_cell_validity_rate_std"] = float(
+            iteration_summary[
+                "vardakas_target_cell_validity_rate"
+            ].std(ddof=1)
+        )
+
+        summary["voronoi_target_cell_validity_rate_std"] = float(
+            iteration_summary[
+                "voronoi_target_cell_validity_rate"
+            ].std(ddof=1)
+        )
+
+        summary["table2_vardakas_repair_cost_std"] = float(
+            iteration_summary[
+                "table2_vardakas_repair_cost"
+            ].std(ddof=1)
+        )
+
+        summary["table2_voronoi_repair_cost_std"] = float(
+            iteration_summary[
+                "table2_voronoi_repair_cost"
+            ].std(ddof=1)
+        )
+
+    # Preserve the existing pooled Table 2 value before the slash.
+    if summary["vardakas_fail_count"] == 0:
+        summary["table2_vardakas_repair_cost"] = 0.0
+    else:
+        summary["table2_vardakas_repair_cost"] = summary[
+            "mean_repair_cost_on_failures"
+        ]
+
+    # VoICE requires no repair under the Table 2 criterion.
+    summary["table2_voronoi_repair_cost"] = 0.0
+
+    return summary
 
 def run_kmeans_voronoi_vs_bisector_evaluation(
     *,
@@ -671,9 +796,20 @@ def run_kmeans_voronoi_vs_bisector_evaluation(
                     )
 
     df_results = pd.DataFrame(rows)
+
     summary = summarise_comparative_results(
         df_results,
         dataset_name=dataset_name,
     )
 
-    return df_results, summary
+    iteration_summary = summarise_comparative_results_by_iteration(
+        df_results,
+        dataset_name=dataset_name,
+    )
+
+    summary = add_comparative_iteration_standard_deviations(
+        summary,
+        iteration_summary,
+    )
+
+    return df_results, summary, iteration_summary

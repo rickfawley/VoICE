@@ -15,6 +15,12 @@ BASE_COLOURS = [
     "#F781BF",
 ]
 
+MODEL_LEVEL_PUBLICATION_MODES = [
+    "Unweighted k-means",
+    "Ranked k-means",
+    "Ranked + weighted SHARK",
+]
+
 DATASET_INFORMATION = {
 
     "Iris": {

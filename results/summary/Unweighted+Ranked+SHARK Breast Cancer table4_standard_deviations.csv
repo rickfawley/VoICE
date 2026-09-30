@@ -1,0 +1,2 @@
+dataset,n_clusters,n_factuals,max_iter,tol,alpha_mode,manual_alpha,alpha_retain_fraction,n_iterations,base_clustering_seed,evaluation_seed,n_init,sd_ddof,mean_r_star_std,r_star_over_d_std,single_feature_feasibility_rate_std,mean_tau_std,minimum_feasibility_rate
+Breast Cancer,2,50,300,0.0001,Calculated from target cluster,1.0,1.0,50,42,42,10,1,0.00750389165851151,0.0002501297219503891,0.6958249317183939,0.031001822674676712,100.0

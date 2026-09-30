@@ -1,5 +1,6 @@
 import streamlit as st
 
+from src.config import MODEL_LEVEL_PUBLICATION_MODES as CF_MODES
 
 def render_experiment_controls(
     dataset_name,
@@ -17,7 +18,7 @@ def render_experiment_controls(
 
         # Three independent checkboxes
         cf_mode_1 = st.checkbox(
-            "Unweighted k-means",
+            CF_MODES[0],
             value=True,
             help=(
                 "Unweighted k-means uses equal feature weights and original feature order. "
@@ -25,7 +26,7 @@ def render_experiment_controls(
         )
 
         cf_mode_2 = st.checkbox(
-            "Ranked k-means",
+            CF_MODES[1],
             value=False,
             help=(
                 "Ranked k-means uses SHARK-derived feature ranks but keeps unweighted k-means geometry. "
@@ -33,7 +34,7 @@ def render_experiment_controls(
         )
 
         cf_mode_3 = st.checkbox(
-            "Ranked + weighted SHARK",
+            CF_MODES[2],
             value=False,
             help=(
                 "Ranked + weighted SHARK uses both SHARK-derived ranks and SHARK-weighted geometry."
@@ -44,20 +45,18 @@ def render_experiment_controls(
         cf_modes = []
 
         if cf_mode_1:
-            cf_modes.append("Unweighted k-means")
+            cf_modes.append(CF_MODES[0])
 
         if cf_mode_2:
-            cf_modes.append("Ranked k-means")
+            cf_modes.append(CF_MODES[1])
 
         if cf_mode_3:
-            cf_modes.append("Ranked + weighted SHARK")
+            cf_modes.append(CF_MODES[2])
 
         # Ensure at least one mode is selected
         if len(cf_modes) == 0:
             st.warning("Select at least one counterfactual comparison mode.")
-            cf_modes = ["Unweighted k-means"]
-
-
+            cf_modes = [CF_MODES[0]]
 
         with st.expander("Runtime Hyperparameters", expanded=False):
             n_init = st.number_input("n_init", value=10, step=1)
